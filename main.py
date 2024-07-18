@@ -52,15 +52,21 @@ def get_crypto_price(currency):
 async def check_prices(bot):
     global chat_id
     while True:
+        currencies_to_remove = []
         for currency, limits in thresholds.items():
             price = get_crypto_price(currency)
             if price is not None:
                 if price < limits["min"]:
                     message = f"Цена {currency} упала ниже минимального порога {limits['min']} USD. Текущая цена: {price} USD"
                     await bot.send_message(chat_id=chat_id, text=message)
+                    currencies_to_remove.append(currency)
                 elif price > limits["max"]:
                     message = f"Цена {currency} превысила максимальный порог {limits['max']} USD. Текущая цена: {price} USD"
                     await bot.send_message(chat_id=chat_id, text=message)
+                    currencies_to_remove.append(currency)
+        if currencies_to_remove:
+            for currency in currencies_to_remove:
+                del thresholds[currency]
         await asyncio.sleep(10)
 
 app = ApplicationBuilder().token(os.environ.get('BOT_TOKEN')).build()
