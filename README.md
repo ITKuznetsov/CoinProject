@@ -1,4 +1,4 @@
-# CoinProject
+# CoinProject (https://t.me/my_coinproject_bot)
 Бот для отслеживания минимального и порогового курса криптовалют.
 ## Основные технологии
 * Python
