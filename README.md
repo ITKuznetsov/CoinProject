@@ -3,6 +3,7 @@
 ## Основные технологии
 * Python
 * Python-Telegram-Bot
+* Docker
 ## Дополнительные пакеты
 * Requests (для запросов к API CoinMarketCap)
 ## Как запустить с использованием контейнеризации? (Linux)
